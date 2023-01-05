@@ -7,7 +7,7 @@ export default function ExpenseItem({ expenses }) {
     const [title, setTitle] = useState('');
 
     const clickHandler = () => {
-        console.log('clickeds')
+        console.log('clicked')
     }
 
     console.log(expenses)
