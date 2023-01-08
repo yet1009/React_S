@@ -1,5 +1,5 @@
 import React from 'react'
-import './ExpenseDate.css'
+import '../Expense/ExpenseDate.css'
 
 export default function ExpenseDate({ item }) {
 
