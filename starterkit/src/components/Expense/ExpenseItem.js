@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import '../Expense/ExpenseItem.css'
 import ExpenseDate from '../Expense/ExpenseDate'
 import ExpenseFilter from './ExpenseFilter';
+import ExpensesChart from './ExpensesChart';
+
 
 export default function ExpenseItem({ expenses }) {
 
@@ -15,6 +17,10 @@ export default function ExpenseItem({ expenses }) {
 
     console.log(expenses)
 
+    const filteredExpenses = expenses.filter(item => {
+        return item.date.getFullYear().toString() === filteredYear
+    })
+
     const filterChangeHandler = selectedYear => {
         console.log('Expenses.js');
         console.log(selectedYear);
@@ -23,25 +29,22 @@ export default function ExpenseItem({ expenses }) {
     return (
         <div className='expenses'>
             <ExpenseFilter onChangeFilter={filterChangeHandler} selected={filteredYear} />
+            <ExpensesChart expenses={filteredExpenses} />
             {
-
-                expenses.map(item => {
+                 filteredExpenses.length === 0 ? <p>No Expenses Found.</p> : filteredExpenses.map(item => {
                             
                     return (
-                        <div className='expense-item'>
+                        <div className='expense-item' key={item.id} >
                             <ExpenseDate item={item} />
                             <div className='expense-item__description'>
                                 <h2>{item.title}</h2>
                                 <div className='expense-item__price'>${item.amount}</div>
                             </div>
-                            <button onClick={clickHandler}>change Title</button>
+                            {/* <button onClick={clickHandler}>change Title</button> */}
                         </div>
                     )
                 })
-
             }
-            
-        
         </div>
         
     )
